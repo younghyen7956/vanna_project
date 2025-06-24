@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # 1. PostgreSQL 서비스 (우리가 ECR에 올린 이미지 사용)
+  postgres:
+    build: ./
+    container_name: vanna-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password1  # 사용할 비밀번호 설정
+      POSTGRES_DB: Adventureworks
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  # 2. Qdrant 서비스 (공식 이미지 사용)
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: vanna-qdrant
+    restart: always
+    ports:
+      - "6333:6333" # HTTP API 포트
+      - "6334:6334" # gRPC 포트
+    volumes:
+      - qdrant-data:/qdrant/storage
+
+  # 3. Ollama 서비스 (공식 이미지 사용)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: vanna-ollama
+    restart: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+
+# 데이터 유지를 위한 볼륨 정의
+volumes:
+  postgres-data:
+  qdrant-data:
+  ollama-data:
