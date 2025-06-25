@@ -26,18 +26,7 @@ services:
     volumes:
       - qdrant-data:/qdrant/storage
 
-  # 3. Ollama 서비스 (공식 이미지 사용)
-  ollama:
-    image: ollama/ollama:latest
-    container_name: vanna-ollama
-    restart: always
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama-data:/root/.ollama
-
 # 데이터 유지를 위한 볼륨 정의
 volumes:
   postgres-data:
   qdrant-data:
-  ollama-data:
