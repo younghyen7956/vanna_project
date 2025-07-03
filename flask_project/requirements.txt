@@ -1,0 +1,11 @@
+fastapi
+gunicorn  # 이 줄이 있는지 확인
+flask
+vanna
+qdrant-client
+psycopg2-binary
+python-dotenv
+pandas
+openai
+fastembed
+gevent
