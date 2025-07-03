@@ -6,3 +6,5 @@ psycopg2-binary
 python-dotenv
 pandas
 openai
+gunicorn
+fastembed
